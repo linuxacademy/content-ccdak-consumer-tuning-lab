@@ -14,14 +14,14 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
  */
 public class MemberSignupsConsumer {
     
-    Consumer<Integer, String> consumer;
+    Consumer<String, String> consumer;
     
     public MemberSignupsConsumer() {
         Properties props = new Properties();
         props.setProperty("bootstrap.servers", "zoo1:9092");
         props.setProperty("group.id", "group1");
         props.setProperty("enable.auto.commit", "false");
-        props.setProperty("key.deserializer", "org.apache.kafka.common.serialization.IntegerDeserializer");
+        props.setProperty("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.setProperty("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         
         consumer = new KafkaConsumer<>(props);
@@ -31,14 +31,14 @@ public class MemberSignupsConsumer {
     public void run() {
         
         while (true) {
-            ConsumerRecords<Integer, String> records = consumer.poll(Duration.ofMillis(100));
+            ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
             handleRecords(records);
         }
         
     }
     
-    public void handleRecords(ConsumerRecords<Integer, String> records) {
-        for (ConsumerRecord<Integer, String> record : records) {
+    public void handleRecords(ConsumerRecords<String, String> records) {
+        for (ConsumerRecord<String, String> record : records) {
             System.out.println("key=" + record.key() + ", value=" + record.value() + ", topic=" + record.topic() + ", partition=" + record.partition() + ", offset=" + record.offset());
         }
         consumer.commitSync();
