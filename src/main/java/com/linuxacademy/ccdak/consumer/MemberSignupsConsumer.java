@@ -18,7 +18,7 @@ public class MemberSignupsConsumer {
     
     public MemberSignupsConsumer() {
         Properties props = new Properties();
-        props.setProperty("bootstrap.servers", "localhost:9092");
+        props.setProperty("bootstrap.servers", "zoo1:9092");
         props.setProperty("group.id", "group1");
         props.setProperty("enable.auto.commit", "false");
         props.setProperty("key.deserializer", "org.apache.kafka.common.serialization.IntegerDeserializer");
