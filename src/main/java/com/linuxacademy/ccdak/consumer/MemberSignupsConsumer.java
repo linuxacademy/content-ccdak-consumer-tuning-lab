@@ -24,6 +24,8 @@ public class MemberSignupsConsumer {
         props.setProperty("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.setProperty("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         
+        props.setProperty("auto.offset.reset", "none");
+        
         consumer = new KafkaConsumer<>(props);
         consumer.subscribe(Arrays.asList("member_signups"));
     }
